@@ -10,20 +10,27 @@ class Article extends Article_parent
 
     protected $profit;
 
-    public function calculateProfit()
+    public function calculateProfit($buyPrice = null, $sellPrice = null)
     {
-        $buyPrice = $this->oxarticles__oxbprice->value;
+        if ($buyPrice === null) {
+            $buyPrice = $this->oxarticles__oxbprice->value;
+        }
 
-        $sellPrice = $this->getPrice()->getPrice();
+        if ($sellPrice === null) {
+            $sellPrice = $this->getPrice()->getPrice();
+        }
+
         $sellPrice = $sellPrice/(100 + self::VAT * 100) * 100;
 
         $this->profit = $sellPrice - $buyPrice;
         return round($this->profit/$sellPrice * 100, 2) . '%';
     }
 
-    public function getProfitColor()
+    public function getProfitColor($buyPrice = null, $sellPrice = null)
     {
-        if(!isset($this->profit)){
+        if($sellPrice !== null && $buyPrice !== null){
+            $this->calculateProfit($buyPrice, $sellPrice);
+        } else if(!isset($this->profit)){
             $this->calculateProfit();
         }
 
