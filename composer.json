@@ -1,0 +1,23 @@
+{
+  "name": "marvinpoehls/profitcalculator",
+  "description": "A tool which calculates the profit for each article",
+  "type": "oxideshop-module",
+  "authors": [
+    {
+      "name": "Marvin Poehls",
+      "email": "marvin.poehls@fatchip.de",
+      "homepage": "https://www.fatchip.de/"
+    }
+  ],
+  "minimum-stability": "dev",
+  "extra": {
+    "oxideshop": {
+      "target-directory": "MarvinPoehls/ProfitCalculator"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "MarvinPoehls\\ProfitCalculation\\": "../../../../source/modules/MarvinPoehls/ProfitCalculator"
+    }
+  }
+}
